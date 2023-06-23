@@ -18,8 +18,8 @@
         </div>
 
         <div class="flex flex-col items-end gap-4">
-            <v-btn color="primary" class="w-[60%]">Entrar</v-btn>
-            <v-btn color="white" class="w-[60%]">Entrar</v-btn>
+            <v-btn color="primary" class="w-[70%]">Entrar</v-btn>
+            <v-btn color="white" class="w-[70%]">Entrar</v-btn>
         </div>
     </div>
 </template>

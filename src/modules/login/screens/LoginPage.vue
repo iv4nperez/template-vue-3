@@ -11,14 +11,7 @@
     </LayoutLogin>
 </template>
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
 import LayoutLogin from "@/layouts/LayoutLogin.vue";
-import { useLogin } from "../composables/useLogin";
-import { useLoginStore } from "../store/state";
 import FormLogin from "../components/FormLogin.vue";
 import CarouselLogin from "../components/CarouselLogin.vue";
-
-const { isLogged } = storeToRefs(useLoginStore());
-
-const { login, loginGoggle } = useLogin();
 </script>
