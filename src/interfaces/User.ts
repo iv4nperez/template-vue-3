@@ -1,9 +1,8 @@
-
 interface User {
     id: number;
     name: string;
     email: string;
-    role: Role
+    role: Role;
 }
 
 interface UserAdmin extends User {

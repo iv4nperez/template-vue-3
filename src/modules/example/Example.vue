@@ -1,5 +1,3 @@
 <template>
-    <LayoutDashboard>
-        Example
-    </LayoutDashboard>
+    <LayoutDashboard> Example </LayoutDashboard>
 </template>
