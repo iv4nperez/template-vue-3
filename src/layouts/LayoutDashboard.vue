@@ -7,13 +7,25 @@
             color="#111827"
         >
             <HeaderDrawer v-model="drawer" />
-            <v-list class="mt-32">
+
+            <div class="mt-28 flex flex-col items-center">
+                <img
+                    class="rounded-full w-24 h-24 mx-auto mb-4"
+                    src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                    alt=""
+                />
+
+                <h2 class="text-white">Armando Ivan Perez Chan</h2>
+                <p class="text-white">ivan.perez.chan@hotmail.com</p>
+            </div>
+
+            <v-list class="mt-10">
                 <v-list-item
                     @click="() => {}"
                     v-for="(item, i) in items"
                     :key="i"
                 >
-                    <v-menu location="end" open-on-hover offset="18">
+                    <v-menu location="end" open-on-hover offset="18" rounded>
                         <template v-slot:activator="{ props }">
                             <div
                                 v-bind="props"
@@ -33,7 +45,12 @@
                             </div>
                         </template>
 
-                        <v-card v-if="!drawer" width="250">
+                        <v-card
+                            elevation="0"
+                            v-if="!drawer"
+                            min-width="250"
+                            class="border"
+                        >
                             <v-list>
                                 <v-list-item
                                     v-for="(item, i) in items.slice(0, 5)"
@@ -69,27 +86,6 @@ import HeaderDrawer from "../components/DashboardLayout/HeaderDrawer.vue";
 const drawer = ref(false);
 
 const items = [
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
-    { title: "Dashboard", icon: "mdi-view-dashboard" },
-    { title: "Photos", icon: "mdi-image" },
-    { title: "About", icon: "mdi-help-box" },
     { title: "Dashboard", icon: "mdi-view-dashboard" },
     { title: "Photos", icon: "mdi-image" },
     { title: "About", icon: "mdi-help-box" },
