@@ -1,37 +1,32 @@
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 //screen
-import LoginScreen from '../modules/login/screens/LoginPage.vue'
-import HomeScreen from '../modules/home/HomePage.vue'
-
-
+import LoginScreen from "../modules/login/screens/LoginPage.vue";
+import HomeScreen from "../modules/home/HomePage.vue";
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/',
-        name: 'Home',
+        path: "/",
+        name: "Home",
         component: HomeScreen,
         meta: {
-            requireAuth: false
-        }
+            requireAuth: false,
+        },
     },
-    
     {
-        path: '/login',
-        name: 'Login',
+        path: "/login",
+        name: "Login",
         component: LoginScreen,
         meta: {
-            requireAuth: false
-        }
-    }
-]
+            requireAuth: false,
+        },
+    },
+];
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: routes
-})
-
-
+    routes: routes,
+});
 
 // router.beforeEach((to, from, next)=>{
 //     const routeProtected = to.matched.some((record) => record.meta.requireAuth);
@@ -45,6 +40,5 @@ const router = createRouter({
 //         next()
 //     }
 //   })
-
 
 export default router;
