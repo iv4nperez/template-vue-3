@@ -8,3 +8,17 @@
 * {
     font-family: 'Poppins', sans-serif;
 }
+
+
+.v-navigation-drawer__content::-webkit-scrollbar {
+    width: 0px;              
+}
+
+/* .v-navigation-drawer__content::-webkit-scrollbar-track {
+    background: #111827;        
+}
+
+.v-navigation-drawer__content::-webkit-scrollbar-thumb {
+    background-color: rgb(114, 114, 114);   
+    border-radius: 20px;      
+} */

@@ -6,7 +6,7 @@
                 'flex-row justify-between': modelValue,
             },
         ]"
-        class="px-4 py-2 flex"
+        class="px-4 py-2 flex fixed z-10 bg-[#111827] w-full"
     >
         <img
             v-if="modelValue"
@@ -17,7 +17,7 @@
 
         <img
             v-else
-            class="w-8 object-contain mt-2"
+            class="w-8 object-contain mt-2 mb-2"
             :src="`${URL_SERVER_LOGOS}/LogoCotemarMonogramaBlanco.png`"
             alt=""
         />
@@ -31,7 +31,7 @@
     </div>
 </template>
 <script setup lang="ts">
-import { computed, defineEmits, defineProps, withDefaults } from "vue";
+import { computed } from "vue";
 import { URL_SERVER_LOGOS } from "../../helpers/constants";
 
 const props = withDefaults(defineProps<{ modelValue: boolean }>(), {
