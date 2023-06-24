@@ -1,10 +1,11 @@
-import { createApp, defineAsyncComponent } from "vue";
+import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import VueCryptojs from "vue-cryptojs";
 import { registerPlugins } from "@/plugins";
 import "./styles/main.css";
+import { printWaterMark } from "./helpers/waterMark";
 
 const pinia = createPinia();
 const app = createApp(App);
@@ -12,6 +13,8 @@ const app = createApp(App);
 registerPlugins(app);
 
 app.use(pinia).use(router).use(VueCryptojs).mount("#app");
+
+printWaterMark();
 
 // const valuePath = 'Example'
 // const otherPath = 'example'

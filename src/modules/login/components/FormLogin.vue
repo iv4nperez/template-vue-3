@@ -27,10 +27,13 @@
         </div>
 
         <div class="flex flex-col items-end gap-4">
-            <v-btn color="primary" @click="handleLogin" class="w-[70%]"
+            <v-btn
+                color="primary"
+                @click="handleLogin"
+                class="w-full xl:w-[70%]"
                 >Entrar</v-btn
             >
-            <v-btn color="white" class="w-[70%]">Entrar</v-btn>
+            <v-btn color="white" class="w-full xl:w-[70%]">Entrar</v-btn>
         </div>
     </div>
 </template>
@@ -60,6 +63,4 @@ const handleLogin = async () => {
 
     await handleLoginAccess(userPrepare);
 };
-
-console.log(user);
 </script>

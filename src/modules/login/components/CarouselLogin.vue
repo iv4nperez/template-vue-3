@@ -18,7 +18,7 @@
         </v-carousel>
 
         <div
-            class="absolute top-0 bottom-0 left-48 w-80 bg-[#1A237E] bg-opacity-40"
+            class="hidden lg:block absolute top-0 bottom-0 left-48 w-80 bg-[#1A237E] bg-opacity-40"
         >
             <div class="flex justify-center mt-20 mb-5">
                 <img class="w-52" :src="logoCotemar" alt="logo cotemar" />

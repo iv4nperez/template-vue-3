@@ -10,13 +10,18 @@
 
             <div class="mt-28 flex flex-col items-center">
                 <img
-                    class="rounded-full w-24 h-24 mx-auto mb-4"
+                    :class="[{ 'w-10 h-10': !drawer }, { 'w-24 h-24': drawer }]"
+                    class="rounded-full mx-auto mb-4 object-cover"
                     src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
                     alt=""
                 />
 
-                <h2 class="text-white">Armando Ivan Perez Chan</h2>
-                <p class="text-white">ivan.perez.chan@hotmail.com</p>
+                <h2 class="text-white text-sm">
+                    {{ drawer ? "Armando Ivan Perez Chan" : "AP" }}
+                </h2>
+                <p v-if="drawer" class="text-[13px] text-[#94a3b8]">
+                    ivan.perez.chan@hotmail.com
+                </p>
             </div>
 
             <v-list class="mt-10">
