@@ -2,17 +2,9 @@ import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 //screen
 import LoginScreen from "../modules/login/screens/LoginPage.vue";
-import HomeScreen from "../modules/home/HomePage.vue";
+// import HomeScreen from "../modules/home/screens/HomeScreen.vue";
 
 const routes: RouteRecordRaw[] = [
-    {
-        path: "/",
-        name: "Home",
-        component: HomeScreen,
-        meta: {
-            requireAuth: false,
-        },
-    },
     {
         path: "/login",
         name: "Login",

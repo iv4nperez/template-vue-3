@@ -34,8 +34,11 @@
 import { computed } from "vue";
 import { URL_SERVER_LOGOS } from "../../helpers/constants";
 
-const props = withDefaults(defineProps<{ modelValue: boolean }>(), {
-    modelValue: false,
+const props = defineProps({
+    modelValue: {
+        type: Boolean,
+        required: true,
+    },
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -44,7 +47,7 @@ const modelValue = computed({
     get() {
         return props.modelValue;
     },
-    set(text: string) {
+    set(text) {
         emit("update:modelValue", text);
     },
 });
