@@ -4,4 +4,6 @@ interface UserCredentials {
     rememberMe: boolean;
     activeDirectory: boolean;
     typeCredential: number;
+    email?: string;
+    token?: string;
 }

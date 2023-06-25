@@ -4,6 +4,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { API_FAKTOR } from "@/helpers/constants";
 import router from "@/router";
+import { buildRoute } from "../helpers/buildRoute";
 
 export const useLogin = () => {
     const { isLogged } = storeToRefs(useLoginStore());
@@ -11,7 +12,7 @@ export const useLogin = () => {
     const handleLoginAccess = async (user: UserCredentials) => {
         const { username, password, typeCredential } = user;
 
-        const data = await axios({
+        const { data } = await axios({
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json;charset=UTF-8",
@@ -24,10 +25,13 @@ export const useLogin = () => {
                 TypeCredential: typeCredential,
                 password: password,
                 username: username,
+                email: "",
+                token: "",
             },
         });
 
-        router.push({ name: "Home" });
+        buildRoute(data.screen);
+        router.push("/exportadordedocumentos");
     };
 
     const loginGoggle = () => {};

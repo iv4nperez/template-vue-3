@@ -51,6 +51,8 @@ const user = ref<UserCredentials>({
     username: "",
     activeDirectory: false,
     typeCredential: 0,
+    email: "",
+    token: "",
 });
 
 const handleLogin = async () => {

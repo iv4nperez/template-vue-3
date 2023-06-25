@@ -1,5 +1,5 @@
 <template>
-    <LayoutDashboard>
+    <LayoutDashboard title="desde mi copmponente">
         export documents
         <router-link to="/home"> ir a home </router-link>
     </LayoutDashboard>
