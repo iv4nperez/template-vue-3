@@ -144,12 +144,77 @@
         </v-navigation-drawer>
 
         <v-app-bar elevation="1">
-            <v-spacer></v-spacer>
-            <img
-                class="rounded-full w-10 h-10 mx-auto mb-4 object-cover"
-                src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
-                alt=""
-            />
+            <template v-slot:prepend>
+                <h2>Modulo X</h2>
+            </template>
+            <template v-slot:append>
+                <div class="flex items-center">
+                    <!-- <div class="flex flex-col items-end">
+                        <h3 class="text-xs">Armando Ivan Perez Chan</h3>
+                        <p class="text-xs font-semibold">
+                            Admin, Supervisor,Admin, Supervisor
+                        </p>
+                    </div> -->
+                    <v-menu
+                        location="bottom center"
+                        open-on-hover
+                        offset="15"
+                        v-model="menu"
+                        :close-on-content-click="false"
+                    >
+                        <template v-slot:activator="{ props }">
+                            <!-- <button v-bind="props">
+                                
+                            </button> -->
+                            <img
+                                v-bind="props"
+                                class="rounded-full w-10 h-10 mx-auto object-cover cursor-pointer"
+                                src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                                alt=""
+                            />
+                        </template>
+
+                        <div
+                            class="bg-white px-6 p-4 rounded-3xl border w-[300px] flex flex-col items-start justify-start"
+                        >
+                            <div
+                                class="flex items-center justify-start gap-3 mb-2"
+                            >
+                                <img
+                                    class="rounded-full w-12 h-12 mx-auto object-cover cursor-pointer"
+                                    src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                                    alt=""
+                                />
+
+                                <div class="text-xs">
+                                    <p>Armando Ivan Perez Chan</p>
+                                    <p>ivan.perez.chan@hotmail.com</p>
+                                </div>
+                            </div>
+
+                            <div class="text-xs">
+                                <p>Mis roles:</p>
+                                <p class="font-semibold">
+                                    Admin, Supervisor, Admin, Supervisor,
+                                    Supervisor, Admin, Supervisor, Admin,
+                                </p>
+                            </div>
+
+                            <div class="border-t w-full my-4"></div>
+
+                            <div class="w-full">
+                                <button
+                                    @click="menu = false"
+                                    class="text-xs flex gap-4 items-center cursor-pointer hover:bg-slate-100 w-full rounded-lg py-2 px-4"
+                                >
+                                    <v-icon size="24">mdi-logout</v-icon>
+                                    <p class="font-semibold">Cerrar sesión</p>
+                                </button>
+                            </div>
+                        </div>
+                    </v-menu>
+                </div>
+            </template>
         </v-app-bar>
 
         <v-main class="bg-[#f1f5f9]">
@@ -183,10 +248,12 @@ export interface Meta {
     requireAuth: boolean;
 }
 
+import { ref } from "vue";
 import HeaderDrawer from "../components/DashboardLayout/HeaderDrawer.vue";
 import { useTemplateUI } from "../store/templateUI";
 import { storeToRefs } from "pinia";
 
+const menu = ref(false);
 const { drawer } = storeToRefs(useTemplateUI());
 
 const routes: Route[] = JSON.parse(localStorage.getItem("routes") || "[]");
