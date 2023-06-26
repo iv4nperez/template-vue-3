@@ -36,11 +36,7 @@
             <v-list-item v-for="(item, i) in routes" :key="i">
                 <v-menu location="end" open-on-hover offset="18" rounded>
                     <template v-slot:activator="{ props, isActive }">
-                        <router-link
-                            v-if="!item.hasChildren"
-                            :to="item.path"
-                            v-slot="{ isExactActive }"
-                        >
+                        <router-link v-if="!item.hasChildren" :to="item.path">
                             <div
                                 v-bind="props"
                                 :class="[
@@ -54,13 +50,23 @@
                                 class="flex gap-4 px-4 py-2 rounded-lg hover:bg-[#29303d] hover:bg-opacity-80 group"
                             >
                                 <v-icon
-                                    :class="[{ 'text-white': isExactActive }]"
+                                    :class="[
+                                        {
+                                            'text-white':
+                                                item.path === $route.path,
+                                        },
+                                    ]"
                                     class="text-[#b8babf]"
                                     >{{ item.icon }}</v-icon
                                 >
                                 <v-list-item-title
                                     v-if="drawer"
-                                    :class="[{ 'text-white': isExactActive }]"
+                                    :class="[
+                                        {
+                                            'text-white':
+                                                item.path === $route.path,
+                                        },
+                                    ]"
                                     class="text-[#b8babf]"
                                 >
                                     {{ item.name }}</v-list-item-title

@@ -42,6 +42,7 @@
 
             <div class="w-full">
                 <button
+                    @click="() => $router.push('/login')"
                     class="text-xs flex gap-4 items-center cursor-pointer hover:bg-slate-100 w-full rounded-lg py-2 px-4"
                 >
                     <v-icon size="24">mdi-logout</v-icon>

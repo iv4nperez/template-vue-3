@@ -31,9 +31,3 @@ import ProfileUser from "@/components/DashboardLayout/ProfileUser.vue";
 import BellNotification from "@/components/DashboardLayout/BellNotification.vue";
 import NavigationDrawer from "@/components/DashboardLayout/NavigationDrawer.vue";
 </script>
-
-<style>
-.router-link-active {
-    background-color: red;
-}
-</style>

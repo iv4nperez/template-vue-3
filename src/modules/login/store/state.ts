@@ -1,12 +1,12 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from "vue";
+import { defineStore } from "pinia";
 
-export const useLoginStore = defineStore('login', () => {
+export const useLoginStore = defineStore("login", () => {
+    const isLogged = ref<boolean>(false);
+    const user = ref<string>("");
 
-  const isLogged = ref<boolean>(false)
-
-  return {
-    isLogged
-  }
-
-})
+    return {
+        isLogged,
+        user,
+    };
+});
