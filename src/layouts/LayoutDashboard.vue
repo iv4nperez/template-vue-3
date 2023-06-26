@@ -4,7 +4,7 @@
 
         <v-app-bar elevation="1">
             <template v-slot:prepend>
-                <h2>{{ title }}</h2>
+                <h2>System name</h2>
             </template>
             <template v-slot:append>
                 <div class="flex gap-4 px-2">
@@ -19,7 +19,7 @@
 
         <v-main class="bg-[#f1f5f9]">
             <div class="p-10">
-                <slot />
+                <RouterView />
             </div>
         </v-main>
     </v-app>
@@ -30,15 +30,6 @@ import Apps from "@/components/DashboardLayout/Apps.vue";
 import ProfileUser from "@/components/DashboardLayout/ProfileUser.vue";
 import BellNotification from "@/components/DashboardLayout/BellNotification.vue";
 import NavigationDrawer from "@/components/DashboardLayout/NavigationDrawer.vue";
-
-const props = defineProps({
-    title: {
-        type: String,
-        default: "Modulo X",
-    },
-});
-
-console.log("dashboard layout");
 </script>
 
 <style>

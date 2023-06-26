@@ -46,7 +46,10 @@
                                 :class="[
                                     { 'justify-center': !drawer },
                                     { 'justify-start': drawer },
-                                    { 'bg-[#29303d]': isExactActive },
+                                    {
+                                        'bg-[#29303d]':
+                                            item.path === $route.path,
+                                    },
                                 ]"
                                 class="flex gap-4 px-4 py-2 rounded-lg hover:bg-[#29303d] hover:bg-opacity-80 group"
                             >
@@ -147,10 +150,13 @@ import { storeToRefs } from "pinia";
 
 import HeaderDrawer from "../../components/DashboardLayout/HeaderDrawer.vue";
 import { Route } from "@/interfaces/Route";
+import { getRoutes } from "@/helpers/localstorageHandler";
+import { buildRoute } from "@/modules/login/helpers/buildRoute";
 
 const { drawer } = storeToRefs(useTemplateUI());
 
-const routes: Route[] = JSON.parse(localStorage.getItem("routes") || "[]");
+const routes = buildRoute(getRoutes(), true);
+
 const thisRouteIsSelected = (item: Route, path: string) => {
     return item?.children?.some((child) => child.path === path);
 };

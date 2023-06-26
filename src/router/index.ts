@@ -2,7 +2,6 @@ import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 //screen
 import LoginScreen from "../modules/login/screens/LoginPage.vue";
-// import HomeScreen from "../modules/home/screens/HomeScreen.vue";
 
 const routes: RouteRecordRaw[] = [
     {

@@ -13,3 +13,19 @@ export const encryptedText = (text: string) => {
     });
     return encrypted.toString();
 };
+
+export const encrypt = (object: any) => {
+    const encrypted = CryptoJS.AES.encrypt(
+        JSON.stringify(object),
+        APPLICATION_NAME.KEY_IDM
+    );
+    return encrypted.toString();
+};
+
+export const decrypt = (encrypted: any) => {
+    const decrypted = CryptoJS.AES.decrypt(
+        encrypted,
+        APPLICATION_NAME.KEY_IDM
+    ).toString(CryptoJS.enc.Utf8);
+    return decrypted;
+};

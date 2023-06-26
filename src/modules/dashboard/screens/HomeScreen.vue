@@ -1,7 +1,5 @@
 <template>
-    <DashboardLayout title="jksnjsnjsn"> ndjdnjdn </DashboardLayout>
+    <div>Dhasbvoard screen</div>
 </template>
 
-<script setup lang="ts">
-import DashboardLayout from "../../../layouts/LayoutDashboard.vue";
-</script>
+<script setup lang="ts"></script>
