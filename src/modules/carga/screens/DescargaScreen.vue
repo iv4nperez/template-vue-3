@@ -1,9 +1,7 @@
 <template>
-    <LayoutDashboard title="desde mi copmponente">
-        export documents
+    <div>
+        descarga screen
         <router-link to="/home"> ir a home </router-link>
-    </LayoutDashboard>
+    </div>
 </template>
-<script setup lang="ts">
-import LayoutDashboard from "../../../layouts/LayoutDashboard.vue";
-</script>
+<script setup lang="ts"></script>

@@ -1,10 +1,11 @@
-import { defineAsyncComponent } from "vue";
 import { removeAccents } from "@/helpers/tools";
 import { Screen } from "../interfaces/ScreenIDM";
 import router from "@/router";
-import { ref } from "vue";
+import dashboardLayout from "../../../layouts/LayoutDashboard.vue";
+import { RouteRecordRaw } from "vue-router";
+import { saveRoutes } from "@/helpers/localstorageHandler";
 
-export const buildRoute = (screen: Screen[]) => {
+export const buildRoute = (screen: Screen[], returnData: boolean = false) => {
     const routesBase: any[] = [];
 
     screen.forEach((screen) => {
@@ -75,11 +76,23 @@ export const buildRoute = (screen: Screen[]) => {
         }
     });
 
-    routesBase.forEach((item: any) => {
-        router.addRoute(item);
-    });
+    const layoutRoute: RouteRecordRaw = {
+        path: "/",
+        name: "Home",
+        component: dashboardLayout,
+        meta: {
+            requireAuth: false,
+        },
+        children: routesBase,
+    };
 
-    localStorage.setItem("routes", JSON.stringify(routesBase));
+    router.addRoute(layoutRoute);
+
+    if (!returnData) {
+        saveRoutes(screen);
+    } else {
+        return routesBase;
+    }
 };
 
 const createImport = (importPath: string | null) => {
