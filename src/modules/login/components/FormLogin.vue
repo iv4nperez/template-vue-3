@@ -72,7 +72,6 @@ const handleLogin = async () => {
         if (menu && menu[0].hasChildren) {
             setTimeout(function () {
                 router.push(menu[0].children[0].path);
-                console.log("Hola Mundo");
             }, 2000);
            
         }
