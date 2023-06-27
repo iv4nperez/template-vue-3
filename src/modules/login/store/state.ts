@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useLoginStore = defineStore("login", () => {
     const isLogged = ref<boolean>(false);
-    const user = ref<string>("");
+    const user = ref<UserResponse>();
 
     return {
         isLogged,

@@ -9,16 +9,16 @@ export const buildRoute = (screen: Screen[], returnData: boolean = false) => {
     const routesBase: any[] = [];
 
     screen.forEach((screen) => {
-        if (screen.parentScreen === "") {
+        if (screen.ParentScreen === "") {
             routesBase.push({
-                name: screen.screenName,
-                icon: screen.icon,
-                component: createImport(screen?.actionUrl),
-                importPath: screen?.actionUrl,
+                name: screen.ScreenName,
+                icon: screen.Icon,
+                component: createImport(screen?.ActionUrl),
+                importPath: screen?.ActionUrl,
                 path: removeAccents(
                     "/" +
                         screen
-                            .screenName!.split(" ")
+                            .ScreenName!.split(" ")
                             .join("")
                             .toLocaleLowerCase()
                 ),
@@ -30,19 +30,19 @@ export const buildRoute = (screen: Screen[], returnData: boolean = false) => {
         } else {
             if (
                 routesBase.filter(
-                    (route: any) => route.name === screen.parentScreen
+                    (route: any) => route.name === screen.ParentScreen
                 ).length > 0
             )
                 return;
 
             routesBase.push({
-                name: screen!.parentScreen,
-                icon: screen!.parentIcon,
+                name: screen!.ParentScreen,
+                icon: screen!.ParentIcon,
                 hasChildren: true,
                 path: removeAccents(
                     "/" +
                         screen
-                            .parentScreen!.split(" ")
+                            .ParentScreen!.split(" ")
                             .join("")
                             .toLocaleLowerCase()
                 ),
@@ -56,21 +56,21 @@ export const buildRoute = (screen: Screen[], returnData: boolean = false) => {
     routesBase.forEach((route: any) => {
         if (route.hasChildren) {
             route.children = screen
-                .filter((screen) => screen.parentScreen === route.name)
+                .filter((screen) => screen.ParentScreen === route.name)
                 .map((screen) => {
                     return {
-                        name: screen.screenName,
-                        icon: screen.icon,
-                        component: createImport(screen.actionUrl),
-                        importPath: screen.actionUrl,
+                        name: screen.ScreenName,
+                        icon: screen.Icon,
+                        component: createImport(screen.ActionUrl),
+                        importPath: screen.ActionUrl,
                         path: removeAccents(
                             "/" +
                                 screen
-                                    .screenName!.split(" ")
+                                    .ScreenName!.split(" ")
                                     .join("")
                                     .toLocaleLowerCase()
                         ),
-                        tooltip: screen.tooltip,
+                        tooltip: screen.Tooltip,
                     };
                 });
         }

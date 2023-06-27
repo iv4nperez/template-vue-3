@@ -16,7 +16,8 @@ const app = createApp(App);
 registerPlugins(app);
 const routes = getRoutes();
 buildRoute(routes);
-
 app.use(pinia).use(router).use(VueCryptojs).mount("#app");
 
 printWaterMark();
+// getCurrentUser();
+

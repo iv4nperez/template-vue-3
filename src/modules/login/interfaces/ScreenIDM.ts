@@ -1,12 +1,13 @@
 export interface Screen {
     screenId: number | null;
-    screenName: null | string;
-    icon: null | string;
+    ScreenName: null | string;
+    Order: null | string;
     order: number;
-    actionUrl: null | string;
-    parentScreen: null | string;
-    parentIcon: null | string;
-    parentOrder: null | string;
-    tooltip: null | string;
-    parentdId: number;
+    ActionUrl: null | string;
+    ParentScreen: null | string;
+    ParentIcon: null | string;
+    ParentOrder: null | string;
+    Tooltip: null | string;
+    ParentdId: number;
+    Icon: null | string;
 }

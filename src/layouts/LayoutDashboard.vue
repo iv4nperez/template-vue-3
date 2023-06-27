@@ -30,4 +30,13 @@ import Apps from "@/components/DashboardLayout/Apps.vue";
 import ProfileUser from "@/components/DashboardLayout/ProfileUser.vue";
 import BellNotification from "@/components/DashboardLayout/BellNotification.vue";
 import NavigationDrawer from "@/components/DashboardLayout/NavigationDrawer.vue";
+import {getCurrentUser} from '../helpers/localstorageHandler'
+import {useLoginStore} from '../modules/login/store/state'
+import { storeToRefs } from "pinia";
+
+const value = getCurrentUser()
+const { user } = storeToRefs(useLoginStore());
+if(value){
+    user.value = JSON.parse(value);
+}
 </script>

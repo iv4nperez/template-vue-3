@@ -11,15 +11,15 @@
             <img
                 :class="[{ 'w-10 h-10': !drawer }, { 'w-24 h-24': drawer }]"
                 class="rounded-full mx-auto mb-4 object-cover"
-                src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                :src="user?.user.img"
                 alt=""
             />
 
             <h2 class="text-white text-sm">
-                {{ drawer ? "Armando Ivan Perez" : "AP" }}
+                {{ drawer ? `${user?.user.fullName}` : `${user?.user.firstName.charAt(0)}  ${user?.user.lastName.charAt(0)}` }}
             </h2>
             <p v-if="drawer" class="text-[13px] text-[#94a3b8]">
-                ivan.perez.chan@hotmail.com
+                {{ user?.user.email }}
             </p>
         </div>
 
@@ -153,13 +153,14 @@
 <script setup lang="ts">
 import { useTemplateUI } from "../../store/templateUI";
 import { storeToRefs } from "pinia";
-
+import {useLoginStore} from '../../modules/login/store/state'
 import HeaderDrawer from "../../components/DashboardLayout/HeaderDrawer.vue";
 import { Route } from "@/interfaces/Route";
 import { getRoutes } from "@/helpers/localstorageHandler";
 import { buildRoute } from "@/modules/login/helpers/buildRoute";
 
 const { drawer } = storeToRefs(useTemplateUI());
+const { user } = storeToRefs(useLoginStore());
 
 const routes = buildRoute(getRoutes(), true);
 

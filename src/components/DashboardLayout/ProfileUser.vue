@@ -9,7 +9,7 @@
             <img
                 v-bind="props"
                 class="rounded-full w-10 h-10 mx-auto object-cover cursor-pointer"
-                src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                :src="user?.user.img"
                 alt=""
             />
         </template>
@@ -20,21 +20,20 @@
             <div class="flex items-center justify-start gap-3 mb-2">
                 <img
                     class="rounded-full w-12 h-12 mx-auto object-cover cursor-pointer"
-                    src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                    :src="user?.user.img"
                     alt=""
                 />
 
                 <div class="text-xs">
-                    <p>Armando Ivan Perez Chan</p>
-                    <p>ivan.perez.chan@hotmail.com</p>
+                    <p>{{user?.user.fullName}}</p>
+                    <p>{{ user?.user.email }}</p>
                 </div>
             </div>
 
             <div class="text-xs">
                 <p>Mis roles:</p>
                 <p class="font-semibold">
-                    Admin, Supervisor, Admin, Supervisor, Supervisor, Admin,
-                    Supervisor, Admin,
+                    {{ user?.roles }}
                 </p>
             </div>
 
@@ -52,3 +51,8 @@
         </div>
     </v-menu>
 </template>
+<script lang="ts" setup>
+import {useLoginStore} from '../../modules/login/store/state'
+import { storeToRefs } from 'pinia';
+const { user } = storeToRefs(useLoginStore());
+</script>

@@ -1,57 +1,120 @@
-// import { storeToRefs } from "pinia";
-// import { useLoginStore } from "@/modules/login/store/state";
+import { storeToRefs } from "pinia";
+import { useLoginStore } from "@/modules/login/store/state";
 // import { ref } from "vue";
 import axios from "axios";
-import { API_FAKTOR } from "@/helpers/constants";
+import { API_IDM,APPLICATION_NAME } from "@/helpers/constants";
 import router from "@/router";
 import { buildRoute } from "../helpers/buildRoute";
+import {saveCurrentUser, saveToken} from '../../../helpers/localstorageHandler'
+import { transformUser } from "../helpers/trasnformUser";
 
 export const useLogin = () => {
-    // const { user } = storeToRefs(useLoginStore());
+    const { user: userStore } = storeToRefs(useLoginStore());
 
     const handleLoginAccess = async (user: UserCredentials) => {
+        const headers = {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+            "Authorization": "",
+        };
+
         const { username, password, typeCredential } = user;
 
         const { data } = await axios({
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json;charset=UTF-8",
-                "Access-Control-Allow-Origin": "*",
-            },
+            headers: headers,
             method: "POST",
-            baseURL: API_FAKTOR,
-            url: "Account/Login",
+            baseURL: API_IDM,
+            url: "Authenticate",
             data: {
+                Username: username,
+                Password: password,
+                Grant_type: "password",
                 TypeCredential: typeCredential,
-                password: password,
-                username: username,
-                email: "",
-                token: "",
+                AppName: "IDM",
+                AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
+                IsEncrypted: true,
             },
         });
 
-        buildRoute(data.screen);
+        if (data) {
+            headers.Authorization = `Bearer ` + data.access_token;
+            const data_login = await axios({
+                headers: headers,
+                method: "POST",
+                baseURL: API_IDM,
+                url: "/Security/Login",
+                data: {
+                    Username: username,
+                    Password: password,
+                    Grant_type: "password",
+                    TypeCredential: typeCredential,
+                    AppName: "IDM",
+                    AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
+                    IsEncrypted: true,
+                },
+            });
+            if (data_login.data.IsAuthenticated) {
+                const resourceIMD = await getMenuIDM(data_login.data, headers);
+                buildRoute(resourceIMD.data);
+                const menu = buildRoute(resourceIMD.data,true);
+                const resultToken = await ApiBetweenApi(user,headers);
 
-        router.push("/home");
+                if (resultToken) {//Save the token us
+                    saveToken(resultToken);
+                }
+                //create the user to state
+               const userData = transformUser(data_login.data, resultToken);
+               userStore.value = userData;
+               saveCurrentUser(userStore.value)
+                if (menu && menu[0].hasChildren) {
+                    router.push(menu[0].children[0].path);
+                }
+            }
 
-        // const userA = {
-        //     user: {
-        //         email: "lfchanb@cotemar.com.mx",
-        //         firstName: "",
-        //         lastName: "",
-        //         lastNameSecond: "",
-        //         fullName: "",
-        //         userName: "lfchanb",
-        //         idPersona: "100",
-        //         hasImage: false,
-        //     },
-        //     roles: ["Admin", "User", "Guest"],
-        //     authentication: {
-        //         token: "token",
-        //         refreshToken: "refreshToken",
-        //         tokenExpiration: "tokeneExpiration",
-        //     },
-        // };
+        }
+    };
+    const getMenuIDM = async (payload: any, headers: any) => {
+        const params = {
+            UserId: payload.UserId,
+            RoleId: 0,
+            ApplicationId: payload.ApplicationId,
+        };
+
+        const data_menu = await axios({
+            headers: headers,
+            method: "GET",
+            baseURL: API_IDM,
+            url: "Screens/GetScreenRetrieveByUserRol/",
+            params: params,
+        });
+
+        return data_menu;
+    };
+    const ApiBetweenApi = async (data: any, headers: any) => {
+        const responseTokenApi = await axios({
+            headers: headers,
+            method: "POST",
+            baseURL: API_IDM,
+            url: "/Authenticate",
+            data: {
+                Username: data.username,
+                Password: data.password,
+                Grant_type: "password",
+                TypeCredential: data.typeCredential,
+                AppName: "IDM",
+                AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
+                IsEncrypted: true,
+            },
+        });
+        if (responseTokenApi != null) {
+            if (
+                responseTokenApi.data != null &&
+                responseTokenApi.data.access_token
+            ) {
+                return responseTokenApi.data;
+            }
+        }
     };
 
     const loginGoggle = () => {};
