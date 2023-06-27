@@ -4,11 +4,12 @@ import App from "./App.vue";
 import router from "./router";
 import VueCryptojs from "vue-cryptojs";
 import { registerPlugins } from "@/plugins";
-import "./styles/main.css";
 import { printWaterMark } from "./helpers/waterMark";
 import { buildRoute } from "./modules/login/helpers/buildRoute";
 import { getRoutes } from "./helpers/localstorageHandler";
+import "./middlewares/axiosMiddleware";
 
+import "./styles/main.css";
 const pinia = createPinia();
 const app = createApp(App);
 

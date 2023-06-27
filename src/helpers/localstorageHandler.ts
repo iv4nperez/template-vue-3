@@ -36,6 +36,12 @@ export const deleteToken = () => {
     );
 };
 
+export const getToken = () => {
+    return localStorage.getItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`
+    );
+};
+
 export const getTokenInformation = () => {
     const info = ref<any>("");
     info.value = localStorage.getItem(

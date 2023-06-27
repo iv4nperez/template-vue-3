@@ -1,4 +1,5 @@
 // import { useLogin } from './../composables/useLogin';
+import { getToken } from "@/helpers/localstorageHandler";
 import axios from "axios";
 
 // const { verifyExpiration } = useLogin()
@@ -9,6 +10,10 @@ axios.defaults.baseURL = `${
 }`;
 axios.interceptors.request.use(
     function (config) {
+        if (getToken()) {
+            config.headers["Authorization"] = `Bearer ${getToken()}`;
+        }
+
         // const isValidToken = verifyExpiration();
 
         // if (!isValidToken) {
