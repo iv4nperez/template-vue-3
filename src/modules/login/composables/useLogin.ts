@@ -127,7 +127,7 @@ export const useLogin = () => {
                 Password: data.password,
                 Grant_type: "password",
                 TypeCredential: data.typeCredential,
-                AppName: "IDM",
+                AppName: APPLICATION_NAME.APP_NAME_SECURITY,
                 AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
                 IsEncrypted: true,
             },
