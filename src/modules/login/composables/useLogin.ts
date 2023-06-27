@@ -3,9 +3,9 @@ import { useLoginStore } from "@/modules/login/store/state";
 // import { ref } from "vue";
 import axios from "axios";
 import { API_IDM, APPLICATION_NAME } from "@/helpers/constants";
-import router from "@/router";
 import { buildRoute } from "../helpers/buildRoute";
 import {
+    deleteRememberMe,
     saveCurrentUser,
     saveToken,
 } from "../../../helpers/localstorageHandler";
@@ -87,6 +87,8 @@ export const useLogin = () => {
                             passwordNoEncrypted,
                             typeCredential
                         );
+                    } else {
+                        deleteRememberMe();
                     }
                     isLogged.value = true;
                 }

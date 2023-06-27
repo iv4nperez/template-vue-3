@@ -9,7 +9,7 @@ export const saveRoutes = (routes: any) => {
 
 export const deleteRoute = () => {
     localStorage.removeItem(`routes-${APPLICATION_NAME.APP_NAME_SECURITY}`);
-}
+};
 
 export const getRoutes = () => {
     const routes = localStorage.getItem(
@@ -31,14 +31,18 @@ export const saveToken = (value = "") => {
     );
 };
 export const deleteToken = () => {
-    localStorage.removeItem( `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`);
-}
+    localStorage.removeItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`
+    );
+};
 
 export const getTokenInformation = () => {
     const info = ref<any>("");
-    info.value = localStorage.getItem( `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`);
+    info.value = localStorage.getItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`
+    );
     return JSON.parse(info.value);
-}
+};
 
 export const saveCurrentUser = (value: any) => {
     localStorage.setItem(
@@ -54,13 +58,21 @@ export const getCurrentUser = () => {
 };
 
 export const deleteCurrentUser = () => {
-    localStorage.removeItem(`${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`);
-}
+    localStorage.removeItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`
+    );
+};
 
 export const saveRememberMe = (value: any) => {
     localStorage.setItem(
         `${APPLICATION_NAME.APP_NAME_SECURITY}-remember-me`,
         JSON.stringify(value)
+    );
+};
+
+export const deleteRememberMe = () => {
+    localStorage.removeItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-remember-me`
     );
 };
 
