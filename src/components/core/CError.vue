@@ -40,7 +40,7 @@ const snackbar = computed({
     get(): boolean {
         return props.show;
     },
-    set(newValue: boolean): void {
+    set(): void {
         props.close();
     },
 });

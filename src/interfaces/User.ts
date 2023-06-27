@@ -1,4 +1,6 @@
-interface UserCredentials {
+import { TokenInformation } from "./AuthenticateToken";
+
+export interface UserCredentials {
     username: string;
     password: string;
     rememberMe: boolean;
@@ -8,7 +10,7 @@ interface UserCredentials {
     token?: string;
 }
 
-interface User {
+export interface User {
     email: string;
     firstName: string;
     lastName: string;
@@ -19,8 +21,8 @@ interface User {
     img: string;
 }
 
-interface UserResponse {
+export interface UserResponse {
     user: User;
     roles: string;
-    token: Tokennformation;
+    token: TokenInformation;
 }
