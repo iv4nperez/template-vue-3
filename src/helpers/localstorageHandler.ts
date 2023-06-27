@@ -19,16 +19,35 @@ export const getRoutes = () => {
     return [];
 };
 
-export const saveToken = ( value = '' ) => {
-    localStorage.setItem( `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`, JSON.stringify(value) );
-}
+export const saveToken = (value = "") => {
+    localStorage.setItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`,
+        JSON.stringify(value)
+    );
+};
 
 export const saveCurrentUser = (value: any) => {
-    localStorage.setItem(`${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`, JSON.stringify(value));
-}
+    localStorage.setItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`,
+        JSON.stringify(value)
+    );
+};
 
 export const getCurrentUser = () => {
+    return localStorage.getItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`
+    );
+};
 
-    return localStorage.getItem(`${APPLICATION_NAME.APP_NAME_SECURITY}-user-information`)
-    
-}
+export const saveRememberMe = (value: any) => {
+    localStorage.setItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-remember-me`,
+        JSON.stringify(value)
+    );
+};
+
+export const getRememberMe = () => {
+    return localStorage.getItem(
+        `${APPLICATION_NAME.APP_NAME_SECURITY}-remember-me`
+    );
+};

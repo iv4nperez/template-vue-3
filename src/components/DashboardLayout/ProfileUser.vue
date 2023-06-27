@@ -25,7 +25,7 @@
                 />
 
                 <div class="text-xs">
-                    <p>{{user?.user.fullName}}</p>
+                    <p>{{ user?.user.fullName }}</p>
                     <p>{{ user?.user.email }}</p>
                 </div>
             </div>
@@ -52,7 +52,7 @@
     </v-menu>
 </template>
 <script lang="ts" setup>
-import {useLoginStore} from '../../modules/login/store/state'
-import { storeToRefs } from 'pinia';
+import { useLoginStore } from "../../modules/login/store/state";
+import { storeToRefs } from "pinia";
 const { user } = storeToRefs(useLoginStore());
 </script>

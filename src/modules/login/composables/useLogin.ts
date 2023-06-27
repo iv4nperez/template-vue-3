@@ -2,21 +2,28 @@ import { storeToRefs } from "pinia";
 import { useLoginStore } from "@/modules/login/store/state";
 // import { ref } from "vue";
 import axios from "axios";
-import { API_IDM,APPLICATION_NAME } from "@/helpers/constants";
+import { API_IDM, APPLICATION_NAME } from "@/helpers/constants";
 import router from "@/router";
 import { buildRoute } from "../helpers/buildRoute";
-import {saveCurrentUser, saveToken} from '../../../helpers/localstorageHandler'
+import {
+    saveCurrentUser,
+    saveToken,
+} from "../../../helpers/localstorageHandler";
 import { transformUser } from "../helpers/trasnformUser";
+import { rememberMeSave } from "../helpers/rememberMe";
 
 export const useLogin = () => {
     const { user: userStore } = storeToRefs(useLoginStore());
 
-    const handleLoginAccess = async (user: UserCredentials) => {
+    const handleLoginAccess = async (
+        user: UserCredentials,
+        passwordNoEncrypted: string
+    ) => {
         const headers = {
             Accept: "application/json",
             "Content-Type": "application/json;charset=UTF-8",
             "Access-Control-Allow-Origin": "*",
-            "Authorization": "",
+            Authorization: "",
         };
 
         const { username, password, typeCredential } = user;
@@ -57,23 +64,32 @@ export const useLogin = () => {
             if (data_login.data.IsAuthenticated) {
                 const resourceIMD = await getMenuIDM(data_login.data, headers);
                 buildRoute(resourceIMD.data);
-                const menu = buildRoute(resourceIMD.data,true);
-                const resultToken = await ApiBetweenApi(user,headers);
+                const menu = buildRoute(resourceIMD.data, true);
+                const resultToken = await ApiBetweenApi(user, headers);
 
-                if (resultToken) {//Save the token us
+                if (resultToken) {
+                    //Save the token us
                     saveToken(resultToken);
                 }
                 //create the user to state
-               const userData = transformUser(data_login.data, resultToken);
-               userStore.value = userData;
-               saveCurrentUser(userStore.value)
+                const userData = transformUser(data_login.data, resultToken);
+                userStore.value = userData;
+                saveCurrentUser(userStore.value);
+                if (user.rememberMe) {
+                    rememberMeSave(
+                        username,
+                        passwordNoEncrypted,
+                        typeCredential
+                    );
+                }
+
                 if (menu && menu[0].hasChildren) {
                     router.push(menu[0].children[0].path);
                 }
             }
-
         }
     };
+
     const getMenuIDM = async (payload: any, headers: any) => {
         const params = {
             UserId: payload.UserId,
@@ -91,6 +107,7 @@ export const useLogin = () => {
 
         return data_menu;
     };
+
     const ApiBetweenApi = async (data: any, headers: any) => {
         const responseTokenApi = await axios({
             headers: headers,
