@@ -1,6 +1,5 @@
 import { storeToRefs } from "pinia";
 import { useLoginStore } from "@/modules/login/store/state";
-// import { ref } from "vue";
 import axios from "axios";
 import { API_IDM, APPLICATION_NAME } from "@/helpers/constants";
 import { buildRoute } from "../helpers/buildRoute";
@@ -11,6 +10,7 @@ import {
 } from "../../../helpers/localstorageHandler";
 import { transformUser } from "../helpers/trasnformUser";
 import { rememberMeSave } from "../helpers/rememberMe";
+import { UserCredentials } from "@/interfaces/User";
 
 export const useLogin = () => {
     const { user: userStore, isLogged } = storeToRefs(useLoginStore());

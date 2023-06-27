@@ -59,13 +59,14 @@ import { useLoginStore } from "../store/state";
 import { storeToRefs } from "pinia";
 import { buildRoute } from "../helpers/buildRoute";
 import { getRoutes } from "@/helpers/localstorageHandler";
-
+import { UserCredentials } from "@/interfaces/User";
 import router from "@/router";
 
 import CError from "../../../components/core/CError.vue";
 
 const { handleLoginAccess } = useLogin();
 const { isLogged } = storeToRefs(useLoginStore());
+
 const accessClassic = ref(false);
 const isLoading = ref<boolean>(false);
 const message = ref<string>("");
