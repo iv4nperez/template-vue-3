@@ -2,6 +2,7 @@ import { RouteRecordRaw, createRouter, createWebHistory } from "vue-router";
 
 //screen
 import LoginScreen from "../modules/login/screens/LoginPage.vue";
+import { getTokenInformation } from "@/helpers/localstorageHandler";
 
 const routes: RouteRecordRaw[] = [
     {
@@ -12,6 +13,12 @@ const routes: RouteRecordRaw[] = [
             requireAuth: false,
         },
     },
+    {
+      path: "/",
+      name: "Fake",
+      component: () => import('../layouts/LayoutDashboard.vue'),
+      meta: { requireAuth: true },
+    },
 ];
 
 const router = createRouter({
@@ -19,17 +26,22 @@ const router = createRouter({
     routes: routes,
 });
 
-// router.beforeEach((to, from, next)=>{
-//     const routeProtected = to.matched.some((record) => record.meta.requireAuth);
-//     const isLogged: boolean = localStorage.getItem('token') ? true : false;
+router.beforeEach((to, from, next) => {
 
-//     if (routeProtected && !isLogged ){
-//         next({ name: 'Login' })
-//     } else if (to.name === 'Login' && isLogged) {
-//         next({ name: 'Home' })
-//     }else{
-//         next()
-//     }
-//   })
+    const rutaProtegida = to.matched.some((record) => record.meta.requireAuth);
+    const user = getTokenInformation();
+    if (rutaProtegida && user === null || (user === null && to.name != "Login")) {
+        next({
+          name: "Login"
+        });
+      } else if (!rutaProtegida && user !== null && to.name === "Login") {
+        next({
+          name: "Home"
+        });
+      } else {
+        next();
+      }
+    });
+  
 
 export default router;

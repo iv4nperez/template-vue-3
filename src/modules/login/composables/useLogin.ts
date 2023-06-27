@@ -13,44 +13,27 @@ import { transformUser } from "../helpers/trasnformUser";
 import { rememberMeSave } from "../helpers/rememberMe";
 
 export const useLogin = () => {
-    const { user: userStore } = storeToRefs(useLoginStore());
+    const { user: userStore, isLogged } = storeToRefs(useLoginStore());
 
     const handleLoginAccess = async (
         user: UserCredentials,
         passwordNoEncrypted: string
     ) => {
-        const headers = {
-            Accept: "application/json",
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-            Authorization: "",
-        };
+        try {
+            const headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json;charset=UTF-8",
+                "Access-Control-Allow-Origin": "*",
+                Authorization: "",
+            };
 
-        const { username, password, typeCredential } = user;
+            const { username, password, typeCredential } = user;
 
-        const { data } = await axios({
-            headers: headers,
-            method: "POST",
-            baseURL: API_IDM,
-            url: "Authenticate",
-            data: {
-                Username: username,
-                Password: password,
-                Grant_type: "password",
-                TypeCredential: typeCredential,
-                AppName: "IDM",
-                AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
-                IsEncrypted: true,
-            },
-        });
-
-        if (data) {
-            headers.Authorization = `Bearer ` + data.access_token;
-            const data_login = await axios({
+            const { data } = await axios({
                 headers: headers,
                 method: "POST",
                 baseURL: API_IDM,
-                url: "/Security/Login",
+                url: "Authenticate",
                 data: {
                     Username: username,
                     Password: password,
@@ -61,32 +44,55 @@ export const useLogin = () => {
                     IsEncrypted: true,
                 },
             });
-            if (data_login.data.IsAuthenticated) {
-                const resourceIMD = await getMenuIDM(data_login.data, headers);
-                buildRoute(resourceIMD.data);
-                const menu = buildRoute(resourceIMD.data, true);
-                const resultToken = await ApiBetweenApi(user, headers);
 
-                if (resultToken) {
-                    //Save the token us
-                    saveToken(resultToken);
-                }
-                //create the user to state
-                const userData = transformUser(data_login.data, resultToken);
-                userStore.value = userData;
-                saveCurrentUser(userStore.value);
-                if (user.rememberMe) {
-                    rememberMeSave(
-                        username,
-                        passwordNoEncrypted,
-                        typeCredential
+            if (data) {
+                headers.Authorization = `Bearer ` + data.access_token;
+                const data_login = await axios({
+                    headers: headers,
+                    method: "POST",
+                    baseURL: API_IDM,
+                    url: "/Security/Login",
+                    data: {
+                        Username: username,
+                        Password: password,
+                        Grant_type: "password",
+                        TypeCredential: typeCredential,
+                        AppName: "IDM",
+                        AppNameSecurity: APPLICATION_NAME.APP_NAME_SECURITY,
+                        IsEncrypted: true,
+                    },
+                });
+                if (data_login.data.IsAuthenticated) {
+                    const resourceIMD = await getMenuIDM(
+                        data_login.data,
+                        headers
                     );
-                }
+                    buildRoute(resourceIMD.data);
+                    const resultToken = await ApiBetweenApi(user, headers);
 
-                if (menu && menu[0].hasChildren) {
-                    router.push(menu[0].children[0].path);
+                    if (resultToken) {
+                        //Save the token us
+                        saveToken(resultToken);
+                    }
+                    //create the user to state
+                    const userData = transformUser(
+                        data_login.data,
+                        resultToken
+                    );
+                    userStore.value = userData;
+                    saveCurrentUser(userStore.value);
+                    if (user.rememberMe) {
+                        rememberMeSave(
+                            username,
+                            passwordNoEncrypted,
+                            typeCredential
+                        );
+                    }
+                    isLogged.value = true;
                 }
             }
+        } catch (error) {
+            isLogged.value = false;
         }
     };
 
