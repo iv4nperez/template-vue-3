@@ -30,13 +30,23 @@ import Apps from "@/components/DashboardLayout/Apps.vue";
 import ProfileUser from "@/components/DashboardLayout/ProfileUser.vue";
 import BellNotification from "@/components/DashboardLayout/BellNotification.vue";
 import NavigationDrawer from "@/components/DashboardLayout/NavigationDrawer.vue";
-import {getCurrentUser} from '../helpers/localstorageHandler'
-import {useLoginStore} from '../modules/login/store/state'
+import { getCurrentUser } from "../helpers/localstorageHandler";
+import { useLoginStore } from "../modules/login/store/state";
 import { storeToRefs } from "pinia";
+import { onMounted } from "vue";
+import axios from "axios";
 
-const value = getCurrentUser()
+const value = getCurrentUser();
 const { user } = storeToRefs(useLoginStore());
-if(value){
+if (value) {
     user.value = JSON.parse(value);
 }
+
+onMounted(async () => {
+    try {
+        await axios.get("/account");
+    } catch (error) {
+        console.log(error);
+    }
+});
 </script>

@@ -24,7 +24,7 @@ export const getRoutes = () => {
     return [];
 };
 
-export const saveToken = (value = "") => {
+export const saveToken = (value: any) => {
     localStorage.setItem(
         `${APPLICATION_NAME.APP_NAME_SECURITY}-token-information`,
         JSON.stringify(value)
