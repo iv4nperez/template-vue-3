@@ -49,7 +49,7 @@ export const verifyExpirationTokenAndRefresh = async () => {
             return result.access_token;
         }
     } catch (error) {
-        console.error(error,"Token");
+        console.error(error,"Token");//Validaciones a IDM
     }
 };
 export const logOff = async () => {
@@ -61,7 +61,6 @@ export const logOff = async () => {
 
         if (current_time.diff(emited, "minutes") >= 30) {
             localStorage.clear();
-
             logout();
             return;
         }
