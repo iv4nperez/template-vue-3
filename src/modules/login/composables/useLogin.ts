@@ -19,6 +19,10 @@ export const useLogin = () => {
         user: UserCredentials,
         passwordNoEncrypted: string
     ) => {
+        // nxjnsjns
+        // slmsklms
+
+        console.log("user", user);
         try {
             const headers = {
                 Accept: "application/json",
