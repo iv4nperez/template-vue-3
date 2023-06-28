@@ -16,12 +16,13 @@
   "dependencies": {
     "@mdi/font": "7.0.96",
     "axios": "^1.3.2",
-    "vue-jwt-decode": "^0.1.0",
+    "moment": "^2.29.4",
     "pinia": "^2.0.33",
     "roboto-fontface": "*",
     "vee-validate": "^4.9.6",
     "vue": "^3.2.25",
     "vue-cryptojs": "^2.1.5",
+    "vue-jwt-decode": "^0.1.0",
     "vue-router": "^4.1.5",
     "vuetify": "^3.0.0",
     "webfontloader": "^1.0.0"

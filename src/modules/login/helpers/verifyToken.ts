@@ -49,7 +49,7 @@ export const verifyExpirationTokenAndRefresh = async () => {
             return result.access_token;
         }
     } catch (error) {
-        console.log(error);
+        console.error(error,"Token");
     }
 };
 export const logOff = async () => {

@@ -46,7 +46,7 @@ onMounted(async () => {
     try {
         await axios.get("/account");
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 });
 </script>
