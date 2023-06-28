@@ -32,19 +32,19 @@
 
                     <div
                         v-else
-                        v-for="n in 10"
+                        v-for="n in 5"
                         :key="n"
                         class="flex gap-2 hover:bg-slate-100 p-3 rounded-lg cursor-default hover:transition-all hover:duration-300 hover:ease-in-out"
                     >
                         <img
                             class="rounded-full w-10 h-10 mx-auto object-cover cursor-pointer"
-                            src="https://react-material.fusetheme.com/assets/images/avatars/brian-hughes.jpg"
+                            :src="`https://robohash.org/${n}`"
                             alt=""
                         />
 
                         <div class="flex flex-col gap-1">
                             <p class="text-xs font-semibold">
-                                Armando Ivan Perez Chan
+                                Vue-Labs
                             </p>
                             <p class="text-xs">
                                 Lorem ipsum, dolor sit amet consectetur
