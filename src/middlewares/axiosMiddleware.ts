@@ -1,6 +1,6 @@
 // import { useLogin } from './../composables/useLogin';
 import { getToken } from "@/helpers/localstorageHandler";
-import { verifyExpirationToken } from "@/modules/login/helpers/verifyToken";
+// import { verifyExpirationToken } from "@/modules/login/helpers/verifyToken";
 import axios from "axios";
 
 // const { verifyExpiration } = useLogin()
@@ -11,7 +11,7 @@ axios.defaults.baseURL = `${
 }`;
 axios.interceptors.request.use(
     function (config) {
-        const isValidToken = verifyExpirationToken();
+        // const isValidToken = verifyExpirationToken();
 
         // if (!isValidToken) {
         //     localStorage.removeItem('token');
