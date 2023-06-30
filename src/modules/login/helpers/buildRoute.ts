@@ -86,7 +86,19 @@ export const buildRoute = (screen: Screen[], returnData: boolean = false) => {
         children: routesBase,
     };
 
-    router.addRoute(layoutRoute);
+    router.addRoute(layoutRoute); //la ruta base y sus hijos
+    
+    const notFoundNoPage = {
+        icon: "",
+        path: "/:pathMatch(.*)*",
+        name: "404",
+        order: 100,
+        // hasChild: true,
+        // props: true,
+        component: () =>
+            import("../../../components/core/NoScreenNotFound.vue"),
+    };
+    router.addRoute(notFoundNoPage); //Agregamos la pagina de errores
 
     if (!returnData) {
         saveRoutes(screen);
