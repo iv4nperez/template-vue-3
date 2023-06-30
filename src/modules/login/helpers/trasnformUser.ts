@@ -21,7 +21,7 @@ export const transformUser = (
                 User.LastNameSecond,
             userName: User.UserName,
             idPersona: User.IdPersona ?? "0",
-            img: URL_SERVER_PROFILE + (!User.IdPersona ? "0" : User.IdPersona),
+            img: URL_SERVER_PROFILE + (!User.IdPersona ? "0" : User.IdPersona)
         },
         roles: Roles,
         token: {
